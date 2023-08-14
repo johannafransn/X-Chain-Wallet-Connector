@@ -4,16 +4,18 @@ import avaxIcon from "./assets/icons/avax.svg";
 import polygonIcon from "./assets/icons/polygon.svg";
 
 import optIcon from "./assets/icons/optimism.svg";
+import usdcIcon from "./assets/icons/arbusdc.svg";
+import usdtIcon from "./assets/icons/arbusdt.svg";
 
 export const chainOptions = [
   {
     value: {
-      chainId: 137,
-      tokenContractAddr: "0x0000000000000000000000000000000000000000",
+      chainId: 80001,
+      chain_testnet: "mumbai",
     },
     label: (
       <>
-        <img src={polygonIcon} width={20} height={20}></img> Polygon
+        <img src={polygonIcon} width={20} height={20}></img> Polygon Mumbai
       </>
     ),
     color: "#00B8D9",
@@ -21,29 +23,29 @@ export const chainOptions = [
   },
   {
     value: {
-      chainId: 42161,
-      tokenContractAddr: "0x0000000000000000000000000000000000000000",
+      chainId: 421613,
+      chain_testnet: "arbitrum",
     },
     label: (
       <>
-        <img src={arbIcon} width={20} height={20}></img> Arbitrum
+        <img src={arbIcon} width={20} height={20}></img> Arbitrum Goerli
       </>
     ),
     color: "#0052CC",
   },
   {
     value: {
-      chainId: 1,
-      tokenContractAddr: "0x2170ed0880ac9a755fd29b2688956bd959f933f8",
+      chainId: 5,
+      chain_testnet: "ethereum",
     },
     label: (
       <>
-        <img src={ethereumIcon} width={20} height={20}></img> Ethereum
+        <img src={ethereumIcon} width={20} height={20}></img> Ethereum Goerli
       </>
     ),
     color: "#5243AA",
   },
-  {
+  /*   {
     value: {
       chainId: 43114,
       tokenContractAddr: "0x1ce0c2827e2ef14d5c4f29a091d735a204794041",
@@ -54,67 +56,28 @@ export const chainOptions = [
       </>
     ),
     color: "#5243AA",
-  },
+  }, */
 ];
 
-export const chainOptionsGoerliOptimism = [
+export const assetOptions = [
   {
-    value: "opt",
+    value: "USDC",
     label: (
       <>
-        <img src={optIcon} width={20} height={20}></img> Optimism Goerli
+        <img src={usdcIcon} width={20} height={20}></img> USDC
       </>
     ),
-    color: "#5243AA",
+    color: "#00B8D9",
+    isFixed: true,
   },
   {
-    value: "goerli",
+    value: "USDT",
     label: (
       <>
-        <img src={ethereumIcon} width={20} height={20}></img> Ethereum Goerli
+        <img src={usdtIcon} width={20} height={20}></img> USDT
       </>
     ),
-    color: "#5243AA",
-  },
-];
-
-export const chainOptionsOwner = [
-  {
-    value: "optimism",
-    label: (
-      <>
-        <img src={optIcon} width={20} height={20}></img> Optimsm Goerli ETH
-      </>
-    ),
-    color: "#5243AA",
-  },
-  {
-    value: "goerli",
-    label: (
-      <>
-        <img src={ethereumIcon} width={20} height={20}></img> Ethereum Goerli
-        ETH
-      </>
-    ),
-    color: "#5243AA",
-  },
-  {
-    value: "mumbai",
-    label: (
-      <>
-        <img src={polygonIcon} width={20} height={20}></img> Polygon Mumbai WETH
-      </>
-    ),
-    color: "#5243AA",
-  },
-  {
-    value: "goerliMatic",
-    label: (
-      <>
-        <img src={ethereumIcon} width={20} height={20}></img> Ethereum Goerli
-        MATIC
-      </>
-    ),
-    color: "#5243AA",
+    color: "#00B8D9",
+    isFixed: true,
   },
 ];

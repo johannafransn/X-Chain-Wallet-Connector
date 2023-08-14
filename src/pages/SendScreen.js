@@ -1,11 +1,8 @@
 import "../index.scss";
-import React, { useState, useEffect, useCallback } from "react";
-
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
-
 import { chainOptions } from "../chainOptions";
-import convert from "crypto-convert";
-
+import { assetOptions } from "../chainOptions";
 import Web3 from "web3";
 import { DataContext } from "../DataContext";
 
@@ -73,27 +70,18 @@ const DeBridge = () => {
     isRunning ? interval : null
   );
 
-  const initiateSwap = async () => {
+  const initiateSend = async () => {
     console.log("Swap inited");
   };
-
-  let renderGasBox;
-  if (inputGasPrice !== 0 && gasData <= inputGasPrice) {
-    renderGasBox = (
-      <div class="alert alert-success" role="alert">
-        Gas limit is hit! Click the "Swap" button with the "From" and "To"
-        chains set with the input value amount.
-      </div>
-    );
-  } else if (inputGasPrice === 0) {
-    renderGasBox = null;
-  } else if (gasData > inputGasPrice) {
-    renderGasBox = (
-      <div class="alert alert-error" role="alert">
-        Gas limit is not hit!
-      </div>
-    );
-  }
+  let sendButtonEnabled =
+    assetAmount && selectedTargetChain.value && selectedAsset;
+  console.log(
+    assetAmount,
+    selectedTargetChain.value,
+    selectedAsset,
+    "sendbuttndisabled",
+    !sendButtonEnabled
+  );
 
   return (
     <div className="container py-5 app-market">
@@ -119,7 +107,7 @@ const DeBridge = () => {
             {" "}
             <label for="cars">Asset</label>
             <Select
-              options={chainOptions}
+              options={assetOptions}
               value={selectedAsset}
               onChange={(val) => setSelectedAsset(val)}
             />
@@ -131,18 +119,16 @@ const DeBridge = () => {
           <label>To</label>
           <input
             class="sc-bGbJRg iBXRhG"
-            inputmode="decimal"
-            title="Token Amount"
+            inputmode="text"
+            title="Public Address"
             autocomplete="off"
             autocorrect="off"
             type="text"
             pattern="^[0-9]*[.,]?[0-9]*$"
-            placeholder="0.0"
+            placeholder="Public address..."
             minlength="1"
-            maxlength="79"
-            spellcheck="false"
             readOnly="true"
-            value={assetAmount}
+            value={userAccountAddress}
           />{" "}
           <div className="col">
             <label for="cars">Network/Chain</label>
@@ -162,10 +148,11 @@ const DeBridge = () => {
             marginBottom: 20,
             backgroundColor: "cadetblue",
           }}
-          onClick={() => initiateSwap()}
+          onClick={() => initiateSend()}
           className="btn"
+          disabled={!sendButtonEnabled}
         >
-          Swap
+          Send
         </button>
       </div>
       <div className="row p-1">
@@ -180,16 +167,9 @@ const DeBridge = () => {
             destination chain
           </p>
         </div>
-        <div className="col">
-          <label>Input your desired gas price in GWEI</label>
-          <input
-            type="text"
-            className="input-group mb-3"
-            value={inputGasPrice}
-            onInput={(e) => setInputGasPrice(Number(e.target.value))}
-          ></input>
-        </div>
-        {renderGasBox}
+        {/*       <div className="col">
+       
+        </div> */}
       </div>
       {errorMsg || successMsg ? (
         <div
