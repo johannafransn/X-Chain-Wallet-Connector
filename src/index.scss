@@ -1,0 +1,253 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;600;700&display=swap");
+
+body {
+  font-family: "Roboto", Helvetica, sans-serif !important;
+  color: #444444;
+}
+
+.purple {
+  color: #a06ffb;
+  text-decoration: underline;
+  margin-bottom: 20px;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+
+.git {
+  color: #3d3d3d;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+.cell-lg-full {
+  max-width: 992px;
+}
+.ingress-content h4 {
+  color: rgba(255, 255, 255, 0.87);
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.ingress-content p {
+  color: rgba(255, 255, 255, 0.87);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.bg-fnox-pumpkin {
+  background-color: #dbc5ac;
+}
+.bg-top-app-market {
+  background-color: #f5abaa;
+  background-image: url(./assets/bridge.png);
+  background-repeat: no-repeat;
+  background-position: 35% 75%;
+  background-size: cover, 50%;
+}
+
+div.page-top {
+  height: 280px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.btn-border-white {
+  border: 1px solid white;
+}
+
+.bg-sandstorm {
+  background-color: #212529;
+}
+
+.app-market-wrapper h4 {
+  margin-top: 40px;
+}
+.h1,
+.h2,
+.h3,
+.h4,
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Montserrat", Helvetica, sans-serif;
+  font-weight: 600;
+}
+
+.app-market-wrapper {
+  margin-left: 120px;
+}
+
+/*Navbar styles below*/
+.nav-bar-lowered-text {
+  position: relative;
+  top: 6px;
+}
+ul#top-menu li a {
+  color: black;
+  font-family: "Montserrat", Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+a {
+  background-color: transparent;
+}
+.btn-link,
+a {
+  text-decoration: none;
+  color: var(--fnox-pumpkin);
+  background-color: transparent;
+}
+
+.bridge-pic {
+  display: block;
+  -webkit-user-select: none;
+  margin: auto;
+  cursor: zoom-in;
+  background-color: hsl(0, 0%, 90%);
+  transition: background-color 300ms;
+}
+
+.alert-secondary {
+  color: #66767a;
+  background-color: #cbe0e6;
+  border-color: #d6f4ee;
+}
+
+.alert-error {
+  color: #3e1415;
+  background-color: #e1babe;
+  border-color: #d6f4ee;
+}
+.alert {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.alert-sand {
+  color: #39220a;
+  background-color: #dac6ac;
+  border-color: #eff4d6;
+}
+.alert-success {
+  color: #0a391a;
+  background-color: #8bc3a4;
+  border-color: #eff9b8;
+}
+.alert,
+.btn .badge,
+.card,
+.page-link {
+  position: relative;
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  color: #272727;
+}
+
+@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+
+.bridge-box {
+  max-width: 728px;
+  background-image: radial-gradient(
+    50% 50% at 50% 50%,
+    #f5e7ff 0%,
+    rgba(226, 214, 207, 0) 100%
+  );
+  border-radius: 0 0 1rem 1rem !important;
+  border-top: none;
+}
+
+/* @media (max-width: 1180px)
+.iBXRhG {
+    width: 100%;
+    margin-right: 0px;
+    height: 50px;
+    font-size: 24px;
+} */
+.iBXRhG {
+  color: #386f65;
+  width: 10%;
+  position: relative;
+  font-weight: 500;
+  outline: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-image: initial;
+  flex: 1 1 auto;
+  font-size: 44px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0px;
+  appearance: textfield;
+  height: 70px;
+  background: none;
+  border-bottom: 0.0625rem solid #386f65;
+  margin-right: 1.875rem;
+}
+
+.tabs .nav-tabs .nav-link.active {
+  color: white;
+  background-color: #004ea0;
+  font-family: "Source Sans Pro", sans-serif;
+  border-color: #dee2e6 #dee2e6 #fff;
+  font-size: 18px;
+}
+.tabs .nav-tabs .nav-link {
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  color: #212529;
+  font-size: 18px;
+}
+
+.metamask-addr-container {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 12px;
+}
+
+.btn-light.mm {
+  color: #0e1340;
+  background-color: #fff;
+  border-color: #3c4278;
+  border-radius: 15px;
+  width: 160px;
+  font-size: 14px;
+}
+
+.btn-light.mm:hover {
+  color: #0e1340;
+  background-color: #d3d8ee;
+  border-color: #3c4278;
+}
+
+.hov {
+  margin-right: 30px;
+}
+
+.hov:hover {
+  text-decoration: white underline;
+}
