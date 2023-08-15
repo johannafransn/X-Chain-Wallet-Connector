@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import { ExternalProvider } from "@ethersproject/providers";
 import { Wormhole, Context, Network } from '@wormhole-foundation/connect-sdk';
 import { EvmContext } from '@wormhole-foundation/connect-sdk-evm';
+import { tokenContractsToChains } from "../constants/db";
 
 
 const NETWORK = Network.TESTNET;
@@ -11,20 +12,26 @@ const contexts = {
 }
 
 
-export const wormholeTestBridge = async (pkOrProvider: string | ExternalProvider, targetChainId: number, targetPublicAddress: string): Promise<string> => {
-    const wormholeSDK = new Wormhole(NETWORK, contexts);
-    const receipt = wormholeSDK.startTransfer(
-        {
-            chain: 'ethereum',
-            address: '0x123...',
-        }, // token id (native chain and address)
-        BigInt(10), // amount
-        'ethereum', // sending chain
-        '0x789...', // sender address
-        'moonbeam', // destination chain
-        '0x789...', // recipient address on destination chain
-    )
-    return receipt
+export const wormholeTestBridge = async (publicAddress: string): Promise<string> => {
+    try {
+        const wormholeSDK = new Wormhole(NETWORK, contexts);
+        const receipt = wormholeSDK.startTransfer(
+            {
+                chain: 'ethereum', //native chain
+                address: tokenContractsToChains.USDC.tokenContractAddress.goerli.toString(), //token contract address
+            }, // this object constitutes as token id (native chain and token contract address)
+            BigInt(10), // amount
+            'ethereum', // sending chain
+            publicAddress, // sender address
+            'polygon', // destination chain
+            publicAddress, // recipient address on destination chain
+        )
+        return receipt
+    } catch (err) {
+        console.log(err, 'error wormhole sdk send');
+        return err + "send ERROR"
+    }
+
 }
 
 
