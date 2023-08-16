@@ -5,7 +5,7 @@ import { chainOptions } from "../chainOptions";
 import { assetOptions } from "../chainOptions";
 import Web3 from "web3";
 import { DataContext } from "../DataContext";
-import { wormholeTestBridge } from "../utils/utils";
+//import { wormholeTestBridge } from "../utils/utils";
 
 //Custom hook to create interval that is clearable
 function useInterval(callback, interval) {
@@ -73,8 +73,8 @@ const DeBridge = () => {
 
   const initiateSend = async () => {
     console.log("Send inited");
-    const txHash = await wormholeTestBridge(userAccountAddress);
-    console.log(txHash, "Send TX hash");
+    /*    const txHash = await wormholeTestBridge(userAccountAddress);
+    console.log(txHash, "Send TX hash"); */
   };
   let sendButtonEnabled =
     assetAmount && selectedTargetChain.value && selectedAsset;
