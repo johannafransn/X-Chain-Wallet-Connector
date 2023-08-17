@@ -1,11 +1,8 @@
-# X-Chain-Wallet-Connectord Website
+# Liquality SDK Demo app
 
-X-Chain-Wallet-Connector
-Website hosted with IPFS/Filecoin using Fleek:
+A demo app for Liquality SDK. It demonstrates the usage of all modules of the SDK.
 
-https://X-Chain-Wallet-Connector.on.fleek.co/
+# Run the app
 
-# How To Run This Project On Your Local Machine
-
-1. In root folder: Install all dependencies with `npm install`
-2. In root folder: Start the development server server via `npm start`.
+`npm install`
+`npm start`

@@ -7,7 +7,11 @@
    https://goerli.etherscan.io/token/0x509ee0d083ddf8ac028f2a56731412edd63223b9
    https://arbiscan.io/token/0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9
    https://mumbai.polygonscan.com/token/0xa02f6adc7926efebbd59fd43a84f4e0c0c91e832?a=0xe84d601e5d945031129a83e5602be0cc7f182cf3
-*/
+
+   ETH Links:
+   https://etherscan.io/token/0xdd69db25f6d620a7bad3023c5d32761d353d3de9
+https://arbiscan.io/token/0xf14b1793423a9643b8c8b601cc38af3e9e6aede6
+   */
 
 export const tokenContractsToChains = {
   USDC: {
@@ -24,6 +28,20 @@ export const tokenContractsToChains = {
       goerli: 0x509ee0d083ddf8ac028f2a56731412edd63223b9,
       arbitrumGoerli: 0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9,
       mumbai: 0xa02f6adc7926efebbd59fd43a84f4e0c0c91e832,
+    },
+  },
+  ETH: {
+    goerli: {
+      decimals: 18,
+      tokenContractAddress: "0xdd69db25f6d620a7bad3023c5d32761d353d3de9",
+    },
+    arbitrumGoerli: {
+      decimals: 9,
+      tokenContractAddress: "0xf14b1793423a9643b8c8b601cc38af3e9e6aede6",
+    },
+    optimismGoerli: {
+      decimals: 9,
+      tokenContractAddress: "0x4200000000000000000000000000000000000006",
     },
   },
 };

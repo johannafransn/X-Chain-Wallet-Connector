@@ -5,6 +5,12 @@ body {
   color: #444444;
 }
 
+.btn {
+  color: #fff !important;
+}
+
+@import "bootstrap";
+
 .purple {
   color: #a06ffb;
   text-decoration: underline;

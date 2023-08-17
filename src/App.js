@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Web3 from "web3";
 import Navbar from "./components/Navbar";
 import SendScreen from "./pages/SendScreen";
+import { Squid } from "@0xsquid/sdk";
 
 import { ethers } from "ethers";
 
