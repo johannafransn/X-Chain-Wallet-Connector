@@ -28,10 +28,10 @@ function App() {
         "..." +
         String(accountFromMetaMask).substr(38, 4)
     );
-    const name = await provider.lookupAddress(accountFromMetaMask[0]);
+    /*  const name = await provider.lookupAddress(accountFromMetaMask[0]);
     if (name) {
       setConnectedAddrValue(name);
-    }
+    } */
   };
 
   return (

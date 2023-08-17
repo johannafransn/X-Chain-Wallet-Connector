@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import { ExternalProvider } from "@ethersproject/providers";
 
 import { tokenContractsToChains } from "../constants/db";
-import { Web3Provider, JsonRpcSigner, TransactionReceipt } from '@ethersproject/providers';
+import { Web3Provider, JsonRpcSigner, JsonRpcProvider, TransactionReceipt } from '@ethersproject/providers';
 import { Squid, } from "@0xsquid/sdk";
 
 
@@ -50,14 +50,19 @@ export const testBridge = async (publicAddress: string): Promise<TransactionRece
         const signer: JsonRpcSigner = await provider.getSigner();
 
 
-        /*         const { route } = await squid.getRoute(params)
-                const tx = await squid.executeRoute({
-                    signer,
-                    route
-                })
-                const txReceipt = await tx.wait()
-                console.log(txReceipt)
-                return txReceipt */
+        const { route } = await squid.getRoute(params)
+        console.log(route, 'squid routedata??')
+        const nonce = await getNonce(provider, "0xb81B9B88e764cb6b4E02c5D0F6D6D9051A61E020")
+        const unsignedTx = await squid.getRawTxHex({ nonce, route })
+        console.log(unsignedTx, 'squid unsigned TX')
+
+        /*   const tx = await squid.executeRoute({
+              signer,
+              route
+          }) */
+        /*    const txReceipt = await tx.wait()
+           console.log(txReceipt)
+           return txReceipt */
         return "Hello it worked"
 
     } catch (err) {
@@ -76,8 +81,9 @@ export const shortenAddress = (address: string): string => {
         String(address).substr(38, 4)
 }
 
-export const sendFromAllChains = async (pkOrProvider: string | ExternalProvider, targetChainId: number, targetPublicAddress: string): Promise<string> => {
-    return ""
+export const getNonce = async (provider: JsonRpcProvider, senderAddress: string): Promise<number> => {
+    const nonce = await provider.getTransactionCount(senderAddress);
+    return nonce;
 }
 
 

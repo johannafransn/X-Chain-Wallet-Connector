@@ -45,6 +45,19 @@ export const chainOptions = [
     ),
     color: "#5243AA",
   },
+  {
+    value: {
+      chainId: 420,
+      chain_testnet: "optimism",
+    },
+    label: (
+      <>
+        <img src={optIcon} width={20} height={20}></img> Optimism Goerli
+      </>
+    ),
+    color: "#5243AA",
+  },
+
   /*   {
     value: {
       chainId: 43114,
@@ -79,5 +92,43 @@ export const assetOptions = [
     ),
     color: "#00B8D9",
     isFixed: true,
+  },
+  {
+    value: "mumbaiETH",
+    label: (
+      <>
+        <img src={polygonIcon} width={20} height={20}></img> WETH Polygon Mumbai
+      </>
+    ),
+    color: "#00B8D9",
+    isFixed: true,
+  },
+  {
+    value: "arbitrumETH",
+    label: (
+      <>
+        <img src={arbIcon} width={20} height={20}></img> ETH Arbitrum Goerli
+      </>
+    ),
+    color: "#0052CC",
+  },
+  {
+    value: "goerliETH",
+    label: (
+      <>
+        <img src={ethereumIcon} width={20} height={20}></img> ETH Ethereum
+        Goerli
+      </>
+    ),
+    color: "#5243AA",
+  },
+  {
+    value: "optimismETH",
+    label: (
+      <>
+        <img src={optIcon} width={20} height={20}></img> ETH Optimism Goerli
+      </>
+    ),
+    color: "#5243AA",
   },
 ];
