@@ -10,6 +10,7 @@ import {
   getTokenContractAddress,
   testBridge,
 } from "../utils/utils";
+import { tokenContractsToChains } from "../constants/db";
 /* import { wormholeTestBridge } from "../utils/utils";
  */
 //Custom hook to create interval that is clearable
@@ -75,27 +76,46 @@ const DeBridge = () => {
     },
     isRunning ? interval : null
   );
-
   const initiateSend = async () => {
     console.log("Send inited");
-    const params = {
-      fromChain: 42161, //TODO: determina from chains which would be an array of chains
-      fromToken: selectedAsset, // token contract address, would be an array also
-      fromAmount: "50000000000000000", // TODO: decimal conversion 0.05 WETH
-      toChain: selectedTargetChain.value.chainId, // chainid
-      toToken: getTokenContractAddress(
-        selectedAsset.value,
-        selectedTargetChain.value.chainId
-      ), //token contract address, use helper function
-      toAddress: userAccountAddress, // the recipient of the trade
-      slippage: 3.0, // 3.00 = 3% max slippage across the entire route, acceptable value range is 1-99
-      enableForecall: true, // instant execution service, defaults to true
-      quoteOnly: false, // optional, defaults to false
-    };
-    const bal = await getBalances(userAccountAddress, selectedAsset.value);
-    console.log(bal, "BALANCES?");
-    //const txHash = await testBridge(userAccountAddress, params);
+    const balancesAvailable = await getBalances(
+      userAccountAddress,
+      selectedAsset.value
+    );
+
+    for (const balanceInfo of balancesAvailable) {
+      const chainId = Object.keys(balanceInfo)[0]; // Extract the chainId from the object keys
+      const { balance, tokenSymbol, tokenContractAddress } =
+        balanceInfo[chainId];
+
+      const tokenData = tokenContractsToChains[tokenSymbol];
+      if (!tokenData) {
+        console.error(
+          `Token ${tokenSymbol} not found in tokenContractsToChains data`
+        );
+        continue;
+      }
+
+      const params = {
+        fromChain: parseInt(chainId),
+        fromToken: tokenContractAddress,
+        fromAmount: balance,
+        toChain: selectedTargetChain.value.chainId,
+        toToken: getTokenContractAddress(
+          tokenSymbol,
+          selectedTargetChain.value.chainId
+        ),
+        toAddress: userAccountAddress[0],
+        slippage: 3.0,
+        enableForecall: true,
+        quoteOnly: false,
+      };
+
+      const txHash = await testBridge(userAccountAddress, params);
+      console.log(`Transaction hash for chainId ${chainId}:`, txHash);
+    }
   };
+
   let sendButtonEnabled =
     assetAmount &&
     selectedTargetChain.value &&
