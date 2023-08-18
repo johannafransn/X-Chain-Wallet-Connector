@@ -11,6 +11,11 @@
    ETH Links:
    https://etherscan.io/token/0xdd69db25f6d620a7bad3023c5d32761d353d3de9
 https://arbiscan.io/token/0xf14b1793423a9643b8c8b601cc38af3e9e6aede6
+
+USDT mainnet:
+https://polygonscan.com/token/0xc2132d05d31c914a87c6611c10748aeb04b58e8f
+https://arbiscan.io/token/0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9
+https://etherscan.io/address/0xdac17f958d2ee523a2206206994597c13d831ec7
    */
 
 export const tokenContractsToChains = {
@@ -28,6 +33,9 @@ export const tokenContractsToChains = {
       goerli: 0x509ee0d083ddf8ac028f2a56731412edd63223b9,
       arbitrumGoerli: 0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9,
       mumbai: 0xa02f6adc7926efebbd59fd43a84f4e0c0c91e832,
+      1: "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      42161: "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+      137: "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
     },
   },
 

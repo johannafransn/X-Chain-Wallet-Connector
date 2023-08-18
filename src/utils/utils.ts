@@ -3,7 +3,7 @@ import { ExternalProvider } from "@ethersproject/providers";
 
 import { tokenContractsToChains } from "../constants/db";
 import { Web3Provider, JsonRpcSigner, JsonRpcProvider, TransactionReceipt } from '@ethersproject/providers';
-import { Squid, } from "@0xsquid/sdk";
+import { Squid, TransactionRequest, } from "@0xsquid/sdk";
 
 
 
@@ -30,16 +30,19 @@ export const initSquid = async () => {
     return squid
 }
 
-export const testBridge = async (publicAddress: string): Promise<TransactionReceipt | string> => {
+export const testBridge = async (senderAddress: string): Promise<TransactionReceipt | string> => {
     try {
         const squid = await initSquid()
+
+        //TODO: See which balances user has across chains, and loop through the params and function based on that
+
         const params = {
             fromChain: 5, // Goerli testnet
-            fromToken: "0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6", // WETH on Goerli
-            fromAmount: "50000000000000000", // 0.05 WETH
-            toChain: 43113, // Avalanche Fuji Testnet
-            toToken: "0x57f1c63497aee0be305b8852b354cec793da43bb", // aUSDC on Avalanche Fuji Testnet
-            toAddress: "0xAD3A87a43489C44f0a8A33113B2745338ae71A9D", // the recipient of the trade
+            fromToken: "0xdd69db25f6d620a7bad3023c5d32761d353d3de9", // ETH on Goerli
+            fromAmount: "30000000000000000", // 0.03 ETH
+            toChain: 421613, // Arbitrum Goerli Testnet
+            toToken: "0xf14b1793423a9643b8c8b601cc38af3e9e6aede6", // eth on arbitrum testnet
+            toAddress: senderAddress, // the recipient of the trade
             slippage: 3.00, // 3.00 = 3% max slippage across the entire route, acceptable value range is 1-99
             enableForecall: true, // instant execution service, defaults to true
             quoteOnly: false // optional, defaults to false
@@ -52,9 +55,17 @@ export const testBridge = async (publicAddress: string): Promise<TransactionRece
 
         const { route } = await squid.getRoute(params)
         console.log(route, 'squid routedata??')
-        const nonce = await getNonce(provider, "0xb81B9B88e764cb6b4E02c5D0F6D6D9051A61E020")
+        const nonce = await getNonce(provider, senderAddress)
         const unsignedTx = await squid.getRawTxHex({ nonce, route })
-        console.log(unsignedTx, 'squid unsigned TX')
+
+        // Parse the serialized transaction
+        const parsedTransaction = ethers.utils.parseTransaction(unsignedTx);
+        // Sign the transaction using the signer
+        const signedTransaction = await signer.signTransaction(parsedTransaction);
+
+        return signedTransaction;
+
+
 
         /*   const tx = await squid.executeRoute({
               signer,
@@ -84,6 +95,22 @@ export const shortenAddress = (address: string): string => {
 export const getNonce = async (provider: JsonRpcProvider, senderAddress: string): Promise<number> => {
     const nonce = await provider.getTransactionCount(senderAddress);
     return nonce;
+}
+
+export const getTokenContractAddress = (selectedAsset, selectedTargetChainId) => {
+    if (!tokenContractsToChains[selectedAsset]) {
+        throw new Error(`Token ${selectedAsset} not found in the tokenContractsToChains data`);
+    }
+
+    const tokenData = tokenContractsToChains[selectedAsset];
+    console.log(tokenData, 'TOKENDATA BÄÄ')
+
+    if (!tokenData.tokenContractAddress[selectedTargetChainId]) {
+        throw new Error(`Token contract address not found for ${selectedAsset} on chainId ${selectedTargetChainId}`);
+    }
+
+    return tokenData.tokenContractAddress[selectedTargetChainId];
+
 }
 
 

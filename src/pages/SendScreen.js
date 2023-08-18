@@ -5,7 +5,7 @@ import { chainOptions } from "../chainOptions";
 import { assetOptions } from "../chainOptions";
 import Web3 from "web3";
 import { DataContext } from "../DataContext";
-import { testBridge } from "../utils/utils";
+import { getTokenContractAddress, testBridge } from "../utils/utils";
 /* import { wormholeTestBridge } from "../utils/utils";
  */
 //Custom hook to create interval that is clearable
@@ -74,11 +74,46 @@ const DeBridge = () => {
 
   const initiateSend = async () => {
     console.log("Send inited");
-    const txHash = await testBridge(userAccountAddress);
+    const params = {
+      fromChain: 42161,
+      fromToken: selectedAsset, // token contract address
+      fromAmount: "50000000000000000", // 0.05 WETH
+      toChain: selectedTargetChain.value.chainId, // chainid
+      toToken: getTokenContractAddress(
+        selectedAsset.value,
+        selectedTargetChain.value.chainId
+      ), //token contract address, use helper function
+      toAddress: userAccountAddress, // the recipient of the trade
+      slippage: 3.0, // 3.00 = 3% max slippage across the entire route, acceptable value range is 1-99
+      enableForecall: true, // instant execution service, defaults to true
+      quoteOnly: false, // optional, defaults to false
+    };
+    const txHash = await testBridge(userAccountAddress, params);
     console.log(txHash, "Send TX hash");
   };
   let sendButtonEnabled =
-    assetAmount && selectedTargetChain.value && selectedAsset;
+    assetAmount &&
+    selectedTargetChain.value &&
+    selectedAsset &&
+    userAccountAddress;
+
+  console.log(
+    assetAmount,
+    selectedTargetChain,
+    selectedAsset,
+    userAccountAddress,
+    "SEND PARAMSO?"
+  );
+  console.log(
+    "toChain:",
+    selectedTargetChain?.value?.chainId,
+    "ToToken:",
+    getTokenContractAddress(
+      selectedAsset?.value,
+      selectedTargetChain?.value?.chainId,
+      "BÄÄÄ"
+    )
+  );
 
   return (
     <div className="container py-5 app-market">

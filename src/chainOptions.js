@@ -7,7 +7,7 @@ import optIcon from "./assets/icons/optimism.svg";
 import usdcIcon from "./assets/icons/arbusdc.svg";
 import usdtIcon from "./assets/icons/arbusdt.svg";
 
-export const chainOptions = [
+/* export const chainOptions = [
   {
     value: {
       chainId: 80001,
@@ -58,18 +58,60 @@ export const chainOptions = [
     color: "#5243AA",
   },
 
-  /*   {
+
+];
+ */
+
+export const chainOptions = [
+  {
     value: {
-      chainId: 43114,
-      tokenContractAddr: "0x1ce0c2827e2ef14d5c4f29a091d735a204794041",
+      chainId: 137,
+      chain_mainnet: "polygon",
     },
     label: (
       <>
-        <img src={avaxIcon} width={20} height={20}></img> Avalanche
+        <img src={polygonIcon} width={20} height={20}></img> Polygon
+      </>
+    ),
+    color: "#00B8D9",
+    isFixed: true,
+  },
+  {
+    value: {
+      chainId: 42161,
+      chain_mainnet: "arbitrum",
+    },
+    label: (
+      <>
+        <img src={arbIcon} width={20} height={20}></img> Arbitrum
+      </>
+    ),
+    color: "#0052CC",
+  },
+  {
+    value: {
+      chainId: 1,
+      chain_mainnet: "ethereum",
+    },
+    label: (
+      <>
+        <img src={ethereumIcon} width={20} height={20}></img> Ethereum
       </>
     ),
     color: "#5243AA",
-  }, */
+  },
+  {
+    value: {
+      chainId: 10,
+      chain_mainnet: "optimism",
+    },
+    label: (
+      <>
+        <img src={optIcon} width={20} height={20}></img> Optimism
+      </>
+    ),
+    color: "#5243AA",
+  },
 ];
 
 export const assetOptions = [
@@ -93,40 +135,12 @@ export const assetOptions = [
     color: "#00B8D9",
     isFixed: true,
   },
+
   {
-    value: "mumbaiETH",
+    value: "ETH",
     label: (
       <>
-        <img src={polygonIcon} width={20} height={20}></img> WETH Polygon Mumbai
-      </>
-    ),
-    color: "#00B8D9",
-    isFixed: true,
-  },
-  {
-    value: "arbitrumETH",
-    label: (
-      <>
-        <img src={arbIcon} width={20} height={20}></img> ETH Arbitrum Goerli
-      </>
-    ),
-    color: "#0052CC",
-  },
-  {
-    value: "goerliETH",
-    label: (
-      <>
-        <img src={ethereumIcon} width={20} height={20}></img> ETH Ethereum
-        Goerli
-      </>
-    ),
-    color: "#5243AA",
-  },
-  {
-    value: "optimismETH",
-    label: (
-      <>
-        <img src={optIcon} width={20} height={20}></img> ETH Optimism Goerli
+        <img src={ethereumIcon} width={20} height={20}></img> ETH
       </>
     ),
     color: "#5243AA",
