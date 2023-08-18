@@ -10,7 +10,10 @@ import {
   getTokenContractAddress,
   testBridge,
 } from "../utils/utils";
-import { tokenContractsToChains } from "../constants/db";
+import {
+  exampleWalletConnectData,
+  tokenContractsToChains,
+} from "../constants/db";
 /* import { wormholeTestBridge } from "../utils/utils";
  */
 //Custom hook to create interval that is clearable
@@ -236,6 +239,8 @@ const DeBridge = () => {
       {transactions.length ? (
         <pre>{JSON.stringify(transactions, null, 2)}</pre>
       ) : null}
+      <h2>Wallet Connect Data Format</h2>
+      <pre>{JSON.stringify(exampleWalletConnectData, null, 2)}</pre>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 {
-  "name": "liquality-sdk-demo",
+  "name": "x-chain-wallet-connector",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
