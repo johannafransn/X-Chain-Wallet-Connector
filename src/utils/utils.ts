@@ -47,12 +47,12 @@ export const testBridge = async (senderAddress: string, params: any): Promise<Tr
 
         const { route } = await squid.getRoute(params)
         console.log(route, 'for params: FROM and TO chain:', params.fromChain, params.toChain,)
-        const nonce = await getNonce(provider, senderAddress)
+        const nonce = await getNonce(provider, senderAddress[0])
         const unsignedTx = await squid.getRawTxHex({ nonce, route })
 
         // Parse the serialized transaction
         /*  const parsedTransaction = ethers.utils.parseTransaction(unsignedTx);
-         // Sign the transaction using the signer
+          Sign the transaction using the signer
          const signedTransaction = await signer.signTransaction(parsedTransaction);
  
          return signedTransaction; */

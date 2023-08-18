@@ -44,6 +44,9 @@ const DeBridge = () => {
   const [selectedAsset, setSelectedAsset] = useState("");
   const [selectedTargetChain, setSelectedTargetChain] = useState({});
   const [assetAmount, setAssetAmount] = useState(0);
+  const [route, setRoute] = useState({});
+  const [rawHexData, setRawHexData] = useState("");
+  const [transactions, setTransactions] = useState([]);
 
   const interval = 15;
 
@@ -66,7 +69,7 @@ const DeBridge = () => {
     web3.eth.getChainId().then((result) => {
       setMetamaskChainId(result);
     });
-  }, []);
+  }, [route, transactions]);
 
   //Fetch continously during the interval set
   useInterval(
@@ -83,8 +86,10 @@ const DeBridge = () => {
       selectedAsset.value
     );
 
+    const transactionHashes = [];
+
     for (const balanceInfo of balancesAvailable) {
-      const chainId = Object.keys(balanceInfo)[0]; // Extract the chainId from the object keys
+      const chainId = Object.keys(balanceInfo)[0];
       const { balance, tokenSymbol, tokenContractAddress } =
         balanceInfo[chainId];
 
@@ -113,7 +118,17 @@ const DeBridge = () => {
 
       const txHash = await testBridge(userAccountAddress, params);
       console.log(`Transaction hash for chainId ${chainId}:`, txHash);
+
+      transactionHashes.push({
+        chainId: parseInt(chainId),
+        tokenSymbol,
+        tokenContractAddress,
+        txHash,
+      });
     }
+    setTransactions(transactionHashes);
+
+    console.log("All transaction hashes:", transactionHashes);
   };
 
   let sendButtonEnabled =
@@ -217,6 +232,9 @@ const DeBridge = () => {
         >
           {errorMsg} {successMsg}
         </div>
+      ) : null}
+      {transactions.length ? (
+        <pre>{JSON.stringify(transactions, null, 2)}</pre>
       ) : null}
     </div>
   );
