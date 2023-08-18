@@ -4,6 +4,7 @@ import { ExternalProvider } from "@ethersproject/providers";
 import { tokenContractsToChains } from "../constants/db";
 import { Web3Provider, JsonRpcSigner, JsonRpcProvider, TransactionReceipt } from '@ethersproject/providers';
 import { Squid, TransactionRequest, } from "@0xsquid/sdk";
+import { ABI } from "../config";
 
 
 
@@ -14,13 +15,15 @@ export default function getLibrary(provider: any): Web3Provider {
 }
 export const initSquid = async () => {
     const squid = new Squid({
-        baseUrl: "https://testnet.api.squidrouter.com", // for mainnet use "https://api.0xsquid.com"
+        // baseUrl: "https://testnet.api.squidrouter.com", // for mainnet use "https://api.0xsquid.com"
+        baseUrl: "https://api.0xsquid.com",
         integratorId: "liquality-sdk",
     });
     await squid.init();
 
     squid.setConfig({
-        baseUrl: "https://testnet.api.squidrouter.com", // for mainnet use "https://api.0xsquid.com"
+        // baseUrl: "https://testnet.api.squidrouter.com", // for mainnet use "https://api.0xsquid.com"
+        baseUrl: "https://api.0xsquid.com",
         integratorId: "liquality-sdk",
     });
 
@@ -112,5 +115,60 @@ export const getTokenContractAddress = (selectedAsset, selectedTargetChainId) =>
     return tokenData.tokenContractAddress[selectedTargetChainId];
 
 }
+
+/* 
+export const getBalances = async (publicAddress: string): Promise<number> => {
+    const tokenContractAddress = '0x...';
+
+    const squid = await initSquid()
+    const provider = new ethers.providers.JsonRpcProvider(squid.chains.find((c) => c.chainId === fromChainId)!.rpc);
+
+    const contract = new ethers.Contract(tokenContractAddress, ABI, provider);
+    const balance = await contract.balanceOf(publicAddress).toString();
+    //balance will be in wei
+    // If you want to know the exact amount of token with its token name 
+    //then you need to divide it with its decimal. For example if you want 
+    //to get USDC amount you need to divide the result by 10^6.
+
+    const balanceInNative = (await contract.balanceOf(publicAddress) / 10 ** 6).toString();
+    //The final output will be "TokenAmount USDC" (example 10 USDC).
+} */
+
+export const getBalances = async (
+    publicAddress: string,
+    tokenSymbol: string
+): Promise<{ [chainId: string]: string }> => {
+    const squid = await initSquid(); // Assuming you have this function defined
+    const balances = {};
+
+    const tokenData = tokenContractsToChains[tokenSymbol];
+    if (!tokenData) {
+        throw new Error(`Token ${tokenSymbol} not found in tokenContractsToChains data`);
+    }
+
+    for (const chainId in tokenData.tokenContractAddress) {
+        const tokenContractAddress = tokenData.tokenContractAddress[chainId];
+        const provider = new ethers.providers.JsonRpcProvider(
+            squid.chains.find((c) => c.chainId === parseInt(chainId))!.rpc
+        );
+
+        const contract = new ethers.Contract(tokenContractAddress, ABI, provider);
+        const balanceInWei = await contract.balanceOf(publicAddress[0]);
+        const balanceInToken = balanceInWei.toString();
+
+        if (!balances[chainId]) {
+            balances[chainId] = balanceInToken;
+        } else {
+            // Add to the existing balance if there's already a balance for the chainId
+            balances[chainId] = ethers.BigNumber.from(balances[chainId]).add(balanceInWei).toString();
+        }
+    }
+
+    return balances;
+};
+
+
+
+
 
 

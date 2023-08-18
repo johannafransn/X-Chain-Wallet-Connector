@@ -16,43 +16,46 @@ USDT mainnet:
 https://polygonscan.com/token/0xc2132d05d31c914a87c6611c10748aeb04b58e8f
 https://arbiscan.io/token/0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9
 https://etherscan.io/address/0xdac17f958d2ee523a2206206994597c13d831ec7
+
+USDC mainnet:
+https://arbiscan.io/token/0xaf88d065e77c8cc2239327c5edb3a432268e5831
+https://polygonscan.com/token/0x2791bca1f2de4661ed88a30c99a7a9449aa84174?a=0x447016eec356e01eb62854cb1058c4553f864cce
+https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48
    */
 
 export const tokenContractsToChains = {
   USDC: {
     decimals: 6,
     tokenContractAddress: {
-      goerli: 0x8ec7f2746d9098a627134091bc9afb4629a8642d,
-      arbitrumGoerli: 0x179522635726710dd7d2035a81d856de4aa7836c,
-      mumbai: 0xe6b8a5cf854791412c1f6efc7caf629f5df1c747,
+      1: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      42161: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+      137: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
     },
   },
   USDT: {
     decimals: 6,
     tokenContractAddress: {
-      goerli: 0x509ee0d083ddf8ac028f2a56731412edd63223b9,
-      arbitrumGoerli: 0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9,
-      mumbai: 0xa02f6adc7926efebbd59fd43a84f4e0c0c91e832,
       1: "0xdac17f958d2ee523a2206206994597c13d831ec7",
       42161: "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
       137: "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
     },
   },
-
-  goerliETH: {
-    decimals: 18,
-    tokenContractAddress: "0xdd69db25f6d620a7bad3023c5d32761d353d3de9",
-  },
-  arbitrumGoerliETH: {
-    decimals: 9,
-    tokenContractAddress: "0xf14b1793423a9643b8c8b601cc38af3e9e6aede6",
-  },
-  optimismGoerliETH: {
-    decimals: 9,
-    tokenContractAddress: "0x4200000000000000000000000000000000000006",
-  },
-  mumbaiETH: {
-    decimals: 0,
-    tokenContractAddress: "0x0",
-  },
 };
+
+/* goerliETH: {
+  decimals: 18,
+  tokenContractAddress: "0xdd69db25f6d620a7bad3023c5d32761d353d3de9",
+},
+arbitrumGoerliETH: {
+  decimals: 9,
+  tokenContractAddress: "0xf14b1793423a9643b8c8b601cc38af3e9e6aede6",
+},
+optimismGoerliETH: {
+  decimals: 9,
+  tokenContractAddress: "0x4200000000000000000000000000000000000006",
+},
+mumbaiETH: {
+  decimals: 0,
+  tokenContractAddress: "0x0",
+},
+ */

@@ -5,7 +5,11 @@ import { chainOptions } from "../chainOptions";
 import { assetOptions } from "../chainOptions";
 import Web3 from "web3";
 import { DataContext } from "../DataContext";
-import { getTokenContractAddress, testBridge } from "../utils/utils";
+import {
+  getBalances,
+  getTokenContractAddress,
+  testBridge,
+} from "../utils/utils";
 /* import { wormholeTestBridge } from "../utils/utils";
  */
 //Custom hook to create interval that is clearable
@@ -75,9 +79,9 @@ const DeBridge = () => {
   const initiateSend = async () => {
     console.log("Send inited");
     const params = {
-      fromChain: 42161,
-      fromToken: selectedAsset, // token contract address
-      fromAmount: "50000000000000000", // 0.05 WETH
+      fromChain: 42161, //TODO: determina from chains which would be an array of chains
+      fromToken: selectedAsset, // token contract address, would be an array also
+      fromAmount: "50000000000000000", // TODO: decimal conversion 0.05 WETH
       toChain: selectedTargetChain.value.chainId, // chainid
       toToken: getTokenContractAddress(
         selectedAsset.value,
@@ -88,32 +92,15 @@ const DeBridge = () => {
       enableForecall: true, // instant execution service, defaults to true
       quoteOnly: false, // optional, defaults to false
     };
-    const txHash = await testBridge(userAccountAddress, params);
-    console.log(txHash, "Send TX hash");
+    const bal = await getBalances(userAccountAddress, selectedAsset.value);
+    console.log(bal, "BALANCES?");
+    //const txHash = await testBridge(userAccountAddress, params);
   };
   let sendButtonEnabled =
     assetAmount &&
     selectedTargetChain.value &&
     selectedAsset &&
     userAccountAddress;
-
-  console.log(
-    assetAmount,
-    selectedTargetChain,
-    selectedAsset,
-    userAccountAddress,
-    "SEND PARAMSO?"
-  );
-  console.log(
-    "toChain:",
-    selectedTargetChain?.value?.chainId,
-    "ToToken:",
-    getTokenContractAddress(
-      selectedAsset?.value,
-      selectedTargetChain?.value?.chainId,
-      "BÄÄÄ"
-    )
-  );
 
   return (
     <div className="container py-5 app-market">
