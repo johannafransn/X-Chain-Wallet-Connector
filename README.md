@@ -7,6 +7,7 @@ Selected assets right now include USDC & USDT
 
 This dapp is supposed to be run alongside a wallet that has `batch_signing` functionality implemented. Otherwise user will have to sign all of the bridge transfers individually.
 
+Sequance wallet SDK offers such functionality, see here: https://docs.sequence.xyz/wallet/guides/send-batch-transactions/
 # Run the app
 
 `npm install`
