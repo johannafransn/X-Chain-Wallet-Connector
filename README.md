@@ -5,7 +5,7 @@ A simple MVP demonstrating a function that could be called `batch_bridging` or `
 Supported chains right now include Polygon, Arbitrum, Ethereum, Avalanche, Optimism.
 Selected assets right now include USDC & USDT
 
-This dapp is supposed to be run alongside a wallet that has `batch_signing` functionality implemented. Otherwise user will have to sign all of the bridge transfers individually.
+This dapp is supposed to be run alongside any wallet that has `batch_signing` functionality implemented. Otherwise user will have to sign all of the bridge transfers individually.
 
 Proposal to introduce a new EIP standard for wallets and dapps to support batch signing would be recommended. 
 
