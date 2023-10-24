@@ -12,5 +12,5 @@ Proposal to introduce a new EIP standard for wallets and dapps to support batch 
 Sequance wallet SDK offers such functionality, see here: https://docs.sequence.xyz/wallet/guides/send-batch-transactions/
 # Run the app
 
-`npm install`
+`npm install` &&
 `npm start`
