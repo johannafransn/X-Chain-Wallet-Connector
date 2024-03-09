@@ -10,6 +10,6 @@ This dapp is supposed to be run alongside any wallet that has `batch_signing` fu
 Proposal to introduce a new EIP standard for wallets and dapps to support batch signing would be recommended. 
 
 Sequance wallet SDK offers such functionality, see here: https://docs.sequence.xyz/wallet/guides/send-batch-transactions/
-# Run the app
+# Run the application
 
 `npm install` && `npm start`
